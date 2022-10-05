@@ -33,6 +33,8 @@ class NewsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newsRepository->save($news, true);
 
+            $this->addFlash('success', 'Ton nouvel article a bien été créé !');
+
             return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -61,6 +63,8 @@ class NewsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newsRepository->save($news, true);
 
+            $this->addFlash('success', 'Ton article a bien été modifié !');
+
             return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -75,6 +79,8 @@ class NewsController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$news->getId(), $request->request->get('_token'))) {
             $newsRepository->remove($news, true);
+
+            $this->addFlash('info', 'Ton article a bien été supprimé !');
         }
 
         return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);

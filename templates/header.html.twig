@@ -1,3 +1,12 @@
+{# Messages Flashes  #}
+
+{% for type,messages in app.flashes(['success', 'danger', 'info']) %}
+    {% for message in messages %}
+        <div class="alert alert-{{ type }} text-center mb-0"> {{ message }} </div>
+    {% endfor %}
+{% endfor %}
+
+ 
  <div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">

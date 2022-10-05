@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    <label >Titre de l'article</label>
+    {{ form_widget(form.title, {'attr':{'class':'form form-control'}}) }}
+
+    <label >Contenu de l'article</label>
+    {{ form_widget(form.description, {'attr':{'class':'form form-control'}}) }}
+
+    <label>Image mise en avant</label>
+    {{ form_widget(form.imageFile, {'attr':{'class':'form form-control'}}) }}
+    <button class="btn btn-primary my-4 px-4">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

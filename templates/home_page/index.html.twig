@@ -3,5 +3,71 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <h1>Accueil</h1>
+   
+    
+
+    <div class="site-section">
+        <div class="container">
+
+            <h1>Accueil</h1>
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2>Derniers articles</h2>
+                </div>
+            </div>
+            
+            <div class="row">
+            
+            {# Boucle #}
+            {% for new in news %}
+                <div class="col-lg-4 mb-4">
+                    <div class="entry2">
+                        <a href="single.html">
+                            <img src="{{ vich_uploader_asset(new, 'imageFile')}}" alt="Image" class="img-fluid rounded">
+                        </a>
+                        <div class="excerpt">
+                        <span class="post-category text-white bg-secondary mb-3">Nature</span>
+
+                        <h2><a href="single.html">{{ new.title }}</a></h2>
+                        <div class="post-meta align-items-center text-left clearfix">
+                            <figure class="author-figure mb-0 mr-3 float-left">
+                                {# <img src="images/person_1.jpg" alt="Image" class="img-fluid"> #}
+                            </figure>
+                            <span class="d-inline-block mt-1">Par <a href="#">Charline</a></span>
+                            <span>{{ new.createdAt|ago }}</span>
+                        </div>
+                
+                        {# pour la gestion des dates on installe le bundle "knp time bundle" #}
+                        <p>{{ new.description|slice(0,100) }} (...)</p>
+                        <button class="btn btn-light">
+                            <a href="#"> En savoir + </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        
+            
+        </div>
+
+{# PAGINATION #}
+            {# <div class="row text-center pt-5 border-top">
+                <div class="col-md-12">
+                    <div class="custom-pagination">
+                        <span>1</span>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <span>...</span>
+                        <a href="#">15</a>
+                    </div>
+                </div>
+            </div> #}
+
+        </div>
+
+    </div>
+
+
+
 {% endblock %}

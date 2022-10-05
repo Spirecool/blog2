@@ -42,6 +42,9 @@ class News
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'news')]
+    private ?User $author = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,5 +126,17 @@ class News
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }

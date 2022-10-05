@@ -10,7 +10,7 @@
         <div class="row same-height justify-content-center">
           <div class="col-md-12 col-lg-10">
             <div class="post-entry text-center">
-              <span class="post-category text-white bg-success mb-3">Nature</span>
+              <span class="post-category text-white bg-success mb-3">{{ single_news.category.name }}</span>
               <h1 class="mb-4"><a href="#">{{ single_news.title }}</a></h1>
               <div class="post-meta align-items-center text-center">
                 {# <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="/assets/images/image-1.jpg" alt="Image" class="img-fluid"></figure> #}
@@ -36,10 +36,10 @@
                 <h1>{{ single_news.title }}</h1>
                 <div class="post-meta">
                 {# <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="/assets/images/image-1.jpg" alt="Image" class="img-fluid"></figure> #}
-                    <span class="d-inline-block mt-1">Par Charline</span>
+                    <span class="d-inline-block mt-1">Par {{single_news.author.firstName }}</span>
                     <span>&nbsp;-&nbsp; {{ single_news.createdAt| ago }}</span>
                 </div>
-                <span class="post-category text-white bg-success mb-3">Nature</span>
+                <span class="post-category text-white bg-success mb-3">{{ single_news.category.name }}</span>
                 <p> {{ single_news.description }}</p>
             <div class="row mb-5 mt-5">
               

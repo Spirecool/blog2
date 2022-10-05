@@ -26,14 +26,14 @@
                             <img src="{{ vich_uploader_asset(new, 'imageFile')}}" alt="Image" class="img-fluid rounded">
                         </a>
                         <div class="excerpt">
-                        <span class="post-category text-white bg-secondary mb-3">Nature</span>
+                        <span class="post-category text-white bg-secondary mb-3">{{ new.category.name }}</span>
 
                         <h2><a href="{{ path('app_new_show', {'id': new.id }) }}">{{ new.title }}</a></h2>
                         <div class="post-meta align-items-center text-left clearfix">
                             <figure class="author-figure mb-0 mr-3 float-left">
                                 {# <img src="images/person_1.jpg" alt="Image" class="img-fluid"> #}
                             </figure>
-                            <span class="d-inline-block mt-1">Par <a href="#">Charline</a></span>
+                            <span class="d-inline-block mt-1">Par <a href="#"> {{new.author.firstName }}</a></span>
                             <span>{{ new.createdAt|ago }}</span>
                         </div>
                 

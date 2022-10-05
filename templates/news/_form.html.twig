@@ -5,7 +5,10 @@
     <label >Contenu de l'article</label>
     {{ form_widget(form.description, {'attr':{'class':'form form-control'}}) }}
 
+    <label >Catégorie (choisir)</label>
+    {{ form_widget(form.category, {'attr':{'class':'form form-control'}}) }}
+
     <label>Image mise en avant</label>
     {{ form_widget(form.imageFile, {'attr':{'class':'form form-control'}}) }}
-    <button class="btn btn-primary my-4 px-4">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary my-4 px-4">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

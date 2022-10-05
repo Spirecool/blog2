@@ -24,16 +24,24 @@ class NewsController extends AbstractController
     #[Route('/new', name: 'app_news_new', methods: ['GET', 'POST'])]
     public function new(Request $request, NewsRepository $newsRepository): Response
     {
+        // on vérifie que l'utilisateur est connecté
+        if(!$this->getUser()) {
+            return $this->redirectToRoute('app_home_page');
+        }
+
         $news = new News();
         $form = $this->createForm(NewsType::class, $news);
         $form->handleRequest($request);
-        //on va seter la date de création
+        //on va seter la date de création en la mettant à la date du jour
         $news->setCreatedAt(new \DateTime());
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //ajoute l'utilisateur connecté en tant qu'auteur
+            $news->setAuthor($this->getUser());
             $newsRepository->save($news, true);
 
-            $this->addFlash('success', 'Ton nouvel article a bien été créé !');
+            $this->addFlash('success', 'Votre nouvel article a bien été créé !');
 
             return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -63,7 +71,7 @@ class NewsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newsRepository->save($news, true);
 
-            $this->addFlash('success', 'Ton article a bien été modifié !');
+            $this->addFlash('success', 'Votre article a bien été modifié !');
 
             return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -80,9 +88,11 @@ class NewsController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$news->getId(), $request->request->get('_token'))) {
             $newsRepository->remove($news, true);
 
-            $this->addFlash('info', 'Ton article a bien été supprimé !');
+            $this->addFlash('info', 'Votre article a bien été supprimé !');
         }
 
         return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+
+

@@ -12,23 +12,23 @@
                 <td>{{ news.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Titre</th>
                 <td>{{ news.title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>Contenu</th>
                 <td>{{ news.description }}</td>
             </tr>
             <tr>
-                <th>ImageName</th>
+                <th>Nom de l'image</th>
                 <td>{{ news.imageName }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
+                <th>Créé le</th>
                 <td>{{ news.createdAt ? news.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>UpdatedAt</th>
+                <th>Modifié le</th>
                 <td>{{ news.updatedAt ? news.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>

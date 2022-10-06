@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie {{ category.name }}{% endblock %}
+
+{% block body %}
+   
+    
+
+    <div class="site-section">
+        <div class="container">
+
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h1>{{ category.name }}</h1>
+                    {% if news|length<1 %}
+                        <p>Aucun article pour cette catégorie</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="row">
+            
+            {# Boucle #}
+            {% for new in news %}
+                <div class="col-lg-4 mb-4">
+                    <div class="entry2">
+                        <a href="{{ path('app_new_show', {'id': new.id }) }}">
+                            <img src="{{ vich_uploader_asset(new, 'imageFile')}}" alt="Image" class="img-fluid rounded">
+                        </a>
+                        <div class="excerpt">
+                        <span class="post-category text-white bg-secondary mb-3">{{ new.category.name }}</span>
+
+                        <h2><a href="{{ path('app_new_show', {'id': new.id }) }}">{{ new.title }}</a></h2>
+                        <div class="post-meta align-items-center text-left clearfix">
+                            <figure class="author-figure mb-0 mr-3 float-left">
+                                {# <img src="images/person_1.jpg" alt="Image" class="img-fluid"> #}
+                            </figure>
+                            <span class="d-inline-block mt-1">Par <a href="#"> {{new.author.firstName }}</a></span>
+                            <span>{{ new.createdAt|ago }}</span>
+                        </div>
+                
+                        {# pour la gestion des dates on installe le bundle "knp time bundle" #}
+                        <p>{{ new.description|slice(0,100) }} (...)</p>
+                        <button class="btn btn-light">
+                            <a href="{{ path('app_new_show', {'id': new.id }) }}"> En savoir + </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        
+            
+        </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

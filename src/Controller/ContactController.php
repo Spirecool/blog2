@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\NavCategory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
+    private $navCategory;
+    public function __construct(NavCategory $navCategory)
+    {
+        $this->navCategory = $navCategory;
+    }
+
     #[Route('/contact', name: 'app_contact')]
     public function index(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response {
         
@@ -40,7 +47,8 @@ class ContactController extends AbstractController
             'contact_address'=>$this->getParameter('app.contact.address'),
             'contact_phone'=>$this->getParameter('app.contact.phone'),
             'contact_address'=>$this->getParameter('app.contact.email'),
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 }

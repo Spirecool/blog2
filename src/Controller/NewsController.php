@@ -10,14 +10,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/news')]
 class NewsController extends AbstractController
 {
+    
     #[Route('/', name: 'app_news_index', methods: ['GET'])]
     public function index(NewsRepository $newsRepository): Response
     {
         return $this->render('news/index.html.twig', [
             'news' => $newsRepository->findAll(),
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
@@ -57,6 +60,7 @@ class NewsController extends AbstractController
     {
         return $this->render('news/show.html.twig', [
             'news' => $news,
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
@@ -79,6 +83,7 @@ class NewsController extends AbstractController
         return $this->renderForm('news/edit.html.twig', [
             'news' => $news,
             'form' => $form,
+            'categoryList' => $this->navCategory->category()
         ]);
     }
 
